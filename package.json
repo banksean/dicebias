@@ -4,7 +4,10 @@
   "description": "",
   "main": "bias.js",
   "dependencies": {
-    "csv-parser": "^2.2.0"
+    "csv-parser": "^2.2.0",
+    "lit-element": "^2.1.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
   },
   "devDependencies": {},
   "scripts": {
