@@ -7,13 +7,27 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
+  mode: 'development',
   entry: {
     'app': './src/elements/db-app/db-app.js',
   },
+  devServer: {
+    contentBase: './dist',
+    hot: true,
+  },
   devtool: 'eval-source-map',
-  plugins: [],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'dicebias',
+      template: 'src/assets/index.html',
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   resolve: {
     extensions: ['.js'],
     modules: ['node_modules'],
@@ -40,5 +54,6 @@ module.exports = (env, argv) => {
   if (argv.analyze) {
     config.plugins.push(new BundleAnalyzerPlugin());
   }
+  
   return config;
 };
