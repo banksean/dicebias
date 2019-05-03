@@ -59,7 +59,7 @@ class AppElement extends connect(store)(LitElement) {
     }
     buttons.push(
       html`
-        <mwc-button raised class="light" @click=${this.undoClicked}>
+        <mwc-button raised class="light" @click=${() => store.dispatch(undoSample())}>
         undo
         </mwc-button>
       `
@@ -86,14 +86,14 @@ class AppElement extends connect(store)(LitElement) {
 
   undoClicked() {
     store.dispatch(undoSample())
-    this.rolls.pop();
-    this.rolls = [...this.rolls];
   }
 
   numberClicked(n) {
     store.dispatch(addSample(n));
-    this.rolls.push(n);
-    this.rolls = [...this.rolls];
+  }
+
+  stateChanged(state) {
+    this.rolls = state.dice.samples;
   }
 }
 customElements.define("db-app", AppElement);
